@@ -73,15 +73,28 @@ header nav a:hover{color:var(--tc)}
 @media(max-width:700px){.bar{display:none}.copy{flex-basis:100%}}
 @media(prefers-reduced-motion:reduce){.slide img,.slide.on img{transition:none;transform:none}.bar i.run{animation:none}}
 
-/* collections line */
-.col{padding-block:clamp(110px,15vw,190px)}
-.col .cap{display:block;margin-bottom:clamp(28px,4vw,48px)}
-.line{font-weight:200;font-size:clamp(30px,4.4vw,64px);line-height:1.3;letter-spacing:-.005em;max-width:1180px}
-.line a{transition:color .3s;white-space:nowrap}
-.line a:hover,.line a.hl{color:var(--tc)}
-.line .d{color:#C9C4BC;margin:0 .32em;font-weight:200}
-.hint{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:clamp(30px,4vw,50px);padding-top:22px;border-top:1px solid var(--line);color:var(--wg)}
-.hint #ty{min-height:1.6em}
+/* collections grid */
+.col{padding-block:clamp(100px,13vw,170px)}
+.col-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:40px;gap:20px;flex-wrap:wrap}
+.col-head h2{font-weight:200;font-size:clamp(34px,4vw,56px);line-height:1}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.2vw,18px)}
+.card{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;background:var(--ch);color:#fff}
+.card img{position:absolute;inset:0;transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
+.card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,17,15,0) 40%,rgba(20,17,15,.72));transition:background .6s}
+.card:hover img{transform:scale(1.06)}
+.card:hover::after{background:linear-gradient(180deg,rgba(20,17,15,.08) 30%,rgba(20,17,15,.72))}
+.card .in{position:absolute;left:clamp(16px,1.6vw,24px);right:clamp(16px,1.6vw,24px);bottom:clamp(16px,1.6vw,22px);z-index:1}
+.card .sz{display:block;font-weight:200;font-size:clamp(26px,2.4vw,36px);line-height:1.05;white-space:nowrap}
+.card .ty{display:block;font-size:11px;letter-spacing:.26em;text-transform:uppercase;margin-top:8px;opacity:.85}
+.card .go2{display:block;font-size:11px;letter-spacing:.26em;text-transform:uppercase;margin-top:14px;max-height:0;opacity:0;transition:opacity .5s,max-height .5s}
+.card:hover .go2{opacity:1;max-height:20px}
+@media(hover:none){.card .go2{display:none}}
+.card.cu{background:var(--ch)}
+.card.cu::after{display:none}
+.card.cu .plus{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:200;font-size:clamp(40px,5vw,64px);color:var(--cr)}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card .ty{font-size:10px;letter-spacing:.2em}}
+@media(prefers-reduced-motion:reduce){.card img{transition:none}.card:hover img{transform:none}}
 
 /* video band */
 .vid{position:relative;height:min(86vh,820px);min-height:460px;overflow:hidden;background:var(--ch);color:#fff}
@@ -154,9 +167,11 @@ header nav a:hover{color:var(--tc)}
 </section>
 
 <section class="col w" id="collections">
-  <span class="cap acc">Collections</span>
-  <div class="line" id="line"></div>
-  <div class="hint"><span class="cap" id="ty">Select a size</span><a class="more" href="#contact">Custom sizes on request</a></div>
+  <div class="col-head">
+    <h2>Collections</h2>
+    <span class="cap acc">Select a size</span>
+  </div>
+  <div class="grid" id="grid"></div>
 </section>
 
 <section class="vid">
@@ -189,28 +204,20 @@ header nav a:hover{color:var(--tc)}
 
 <script>
 {
-// collections: [label, type shown on hover, Drive folder id]
-const C=[
- ["30×30","Parking tiles","1NM1vygtPcztXMsaLTX4afWOYhZA2Mwpj"],
- ["30×45","Wall tiles","1Fm2A-87mmPGOERQouHXjbMNmMaefIynl"],
- ["30×60","Wall tiles","18XkGavd5OHl7nh8c-5fYA0l-Kz6vNyBL"],
- ["20×120","Wood-look planks","1zvst-5COfI7CECKKw4oFgnngV0U6N2Db"],
- ["60×60","Porcelain","1BNozQYHJwBIqNGDMWQ5NtW39cnlUaVG2"],
- ["60×120","Glazed vitrified","1L6ZZEiyyB6IU50VQ2dCnx4bFhTyLY6SP"],
- ["Porcelain","60×120 · Water absorption ≤ 2%","1-JNmcSq0TEKaBavogf-NzJXAiLIGOZbk"],
- ["Full Body","60×60 · 60×120 · 9 & 15 mm","1V_H2StGtnsIHXzGI2jzBP53b_KxtOn_m"],
- ["120×180","Slabs","1idBbDTDYBhKuu123NXzPXqeet0tEDHoj"],
- ["80×320","Slabs · 15 mm · 240 / 300 / 320 cm","1R8iO58vLtwqGhSAHrxZAkgGpoSRpthRk"],
- ["160×320","Slabs · 12 mm","1wgMbae1sda9tjV6b1GwZ31AtavAje-Sv"]
+const S=[
+ ["30×30","Parking","tx-parking","1NM1vygtPcztXMsaLTX4afWOYhZA2Mwpj"],
+ ["30×45","Wall","tx-wall45","1Fm2A-87mmPGOERQouHXjbMNmMaefIynl"],
+ ["30×60","Wall","tx-wall60","18XkGavd5OHl7nh8c-5fYA0l-Kz6vNyBL"],
+ ["20×120","Plank","tx-plank","1zvst-5COfI7CECKKw4oFgnngV0U6N2Db"],
+ ["60×60","Porcelain","tx-p60","1BNozQYHJwBIqNGDMWQ5NtW39cnlUaVG2"],
+ ["60×120","Full Body · 9 & 15 mm","fullbody-bedroom","1V_H2StGtnsIHXzGI2jzBP53b_KxtOn_m"],
+ ["60×120","Glazed Vitrified","tx-gvt","1L6ZZEiyyB6IU50VQ2dCnx4bFhTyLY6SP"],
+ ["60×120","Porcelain","tx-porc","1-JNmcSq0TEKaBavogf-NzJXAiLIGOZbk"],
+ ["120×180","Slab","slab-kitchen","1idBbDTDYBhKuu123NXzPXqeet0tEDHoj"],
+ ["80×240–320","Slab · 15 mm","tx-slab80","1R8iO58vLtwqGhSAHrxZAkgGpoSRpthRk"],
+ ["160×320","Slab · 12 mm","tx-slab160","1wgMbae1sda9tjV6b1GwZ31AtavAje-Sv"]
 ];
-const line=document.getElementById('line'),ty=document.getElementById('ty');
-line.innerHTML=C.map((c,i)=>'<a href="https://drive.google.com/drive/folders/'+c[2]+'" target="_blank" rel="noopener" data-i="'+i+'">'+c[0]+'</a>').join(' <span class="d">·</span> ');
-line.querySelectorAll('a').forEach(a=>{
-  const show=()=>{ty.textContent=C[a.dataset.i][1];ty.classList.add('acc')};
-  const hide=()=>{ty.textContent='Select a size';ty.classList.remove('acc')};
-  a.addEventListener('mouseenter',show);a.addEventListener('focus',show);
-  a.addEventListener('mouseleave',hide);a.addEventListener('blur',hide);
-});
+document.getElementById('grid').innerHTML=S.map(r=>'<a class="card" href="https://drive.google.com/drive/folders/'+r[3]+'" target="_blank" rel="noopener"><img src="images/'+r[2]+'.jpg" alt="'+r[0]+' '+r[1]+'" loading="lazy"><div class="in"><span class="sz">'+r[0]+'</span><span class="ty">'+r[1]+'</span><span class="go2">See designs →</span></div></a>').join('')+'<a class="card cu" href="#contact"><span class="plus">+</span><div class="in"><span class="sz">Custom</span><span class="ty">Any size · Any finish</span></div></a>';
 
 // slider
 const slides=[...document.querySelectorAll('.slide')],copies=[...document.querySelectorAll('.copy > div')];
