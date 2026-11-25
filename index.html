@@ -93,7 +93,10 @@ header nav a{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.25)}
 .reach .cap{display:block;margin-top:30px}
 
 /* contact */
-.ct{background:var(--ch);color:var(--cr);padding:clamp(100px,13vw,160px) 0 50px}
+.ct .map{position:absolute;right:-3%;top:clamp(30px,5vw,80px);width:min(60%,880px);height:auto;pointer-events:none}
+.ct .w{position:relative;z-index:1}
+@media(max-width:700px){.ct .map{width:150%;right:-25%;top:40px;opacity:.6}}
+.ct{position:relative;overflow:hidden;background:var(--ch);color:var(--cr);padding:clamp(100px,13vw,160px) 0 50px}
 .ct h2{font-weight:200;font-size:clamp(44px,7vw,104px);line-height:1;margin-bottom:clamp(50px,7vw,90px)}
 .ct-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;border-top:1px solid rgba(247,243,236,.18);padding-top:34px}
 .ct-g .cap{color:#A9A6A0;display:block;margin-bottom:10px}
@@ -182,6 +185,7 @@ header nav a{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.25)}
 </section>
 
 <section class="ct" id="contact">
+  <img class="map" src="images/world-dots.svg" alt="" aria-hidden="true">
   <div class="w">
     <h2>Let's talk.</h2>
     <div class="ct-g">
