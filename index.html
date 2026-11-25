@@ -78,22 +78,24 @@ header nav a{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.25)}
 .idx{padding-block:clamp(100px,14vw,170px)}
 .idx-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:40px;gap:20px;flex-wrap:wrap}
 .idx h2{font-weight:200;font-size:clamp(34px,4vw,56px);line-height:1}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.6vw,24px)}
-.card{display:block;perspective:900px}
-.plate{position:relative;aspect-ratio:4/5;background:var(--cr);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:background .5s}
-.card:hover .plate{background:#F1EBE1}
-.plate .dim{position:absolute;left:16px;top:14px;font-size:11px;letter-spacing:.22em;color:var(--wg);font-weight:400}
-.tile{background-size:cover;background-position:center;box-shadow:0 26px 34px -18px rgba(43,39,36,.42),0 2px 5px rgba(43,39,36,.12),inset 0 0 0 1px rgba(255,255,255,.25);transform:translateZ(0) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s cubic-bezier(.2,.7,.2,1),box-shadow .5s}
-.card:hover .tile{transform:translateY(-10px) scale(1.035) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));box-shadow:0 40px 46px -20px rgba(43,39,36,.5),0 3px 8px rgba(43,39,36,.14),inset 0 0 0 1px rgba(255,255,255,.3)}
-.meta2{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:16px 2px 0}
-.meta2 .sz{font-weight:200;font-size:clamp(22px,2vw,28px);white-space:nowrap}
-.meta2 .ty{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--wg);font-weight:400;text-align:right}
-.go2{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--tc);padding:8px 2px 0;opacity:0;transform:translateY(-4px);transition:opacity .4s,transform .4s}
-.card:hover .go2{opacity:1;transform:none}
-@media(hover:none){.go2{opacity:1;transform:none}}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.2vw,18px)}
+.card{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;background:var(--ch);color:#fff}
+.card img{position:absolute;inset:0;transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
+.card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,17,15,0) 40%,rgba(20,17,15,.72));transition:background .6s}
+.card:hover img{transform:scale(1.06)}
+.card:hover::after{background:linear-gradient(180deg,rgba(20,17,15,.08) 30%,rgba(20,17,15,.72))}
+.card .in{position:absolute;left:clamp(16px,1.6vw,24px);right:clamp(16px,1.6vw,24px);bottom:clamp(16px,1.6vw,22px);z-index:1}
+.card .sz{display:block;font-weight:200;font-size:clamp(26px,2.4vw,36px);line-height:1.05;white-space:nowrap}
+.card .ty{display:block;font-size:11px;letter-spacing:.26em;text-transform:uppercase;margin-top:8px;opacity:.85}
+.card .go2{display:block;font-size:11px;letter-spacing:.26em;text-transform:uppercase;margin-top:14px;max-height:0;opacity:0;transition:opacity .5s,max-height .5s}
+.card:hover .go2{opacity:1;max-height:20px}
+@media(hover:none){.card .go2{display:none}}
+.card.cu{background:var(--ch)}
+.card.cu::after{display:none}
+.card.cu .plus{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:200;font-size:clamp(40px,5vw,64px);color:var(--cr)}
 @media(max-width:1000px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.meta2{flex-direction:column;gap:2px}.meta2 .ty{text-align:left}.plate .dim{font-size:9px;left:10px;top:10px}}
-@media(prefers-reduced-motion:reduce){.tile,.card:hover .tile{transition:none;transform:none}}
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card .ty{font-size:10px;letter-spacing:.2em}}
+@media(prefers-reduced-motion:reduce){.card img{transition:none}.card:hover img{transform:none}}
 
 /* full bleed */
 .bleed{height:min(92vh,860px)}
@@ -224,23 +226,19 @@ header nav a{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.25)}
 <script>
 {
 const S=[
- ["30×30","Parking","300 × 300 mm",30,30,"parking","1NM1vygtPcztXMsaLTX4afWOYhZA2Mwpj"],
- ["30×45","Wall","300 × 450 mm",30,45,"wall45","1Fm2A-87mmPGOERQouHXjbMNmMaefIynl"],
- ["30×60","Wall","300 × 600 mm",30,60,"wall60","18XkGavd5OHl7nh8c-5fYA0l-Kz6vNyBL"],
- ["20×120","Plank","200 × 1200 mm",20,120,"plank","1zvst-5COfI7CECKKw4oFgnngV0U6N2Db"],
- ["60×60","Porcelain","600 × 600 mm",60,60,"p60","1BNozQYHJwBIqNGDMWQ5NtW39cnlUaVG2"],
- ["60×120","Full Body","9 · 15 mm thick",60,120,"fullbody","1V_H2StGtnsIHXzGI2jzBP53b_KxtOn_m"],
- ["60×120","Glazed Vitrified","600 × 1200 mm",60,120,"gvt","1L6ZZEiyyB6IU50VQ2dCnx4bFhTyLY6SP"],
- ["60×120","Porcelain","600 × 1200 mm",60,120,"porc","1-JNmcSq0TEKaBavogf-NzJXAiLIGOZbk"],
- ["120×180","Slab","1200 × 1800 mm",120,180,"slab120","1idBbDTDYBhKuu123NXzPXqeet0tEDHoj"],
- ["80×320","Slab · 15 mm","800 × 2400 – 3200 mm",80,320,"slab80","1R8iO58vLtwqGhSAHrxZAkgGpoSRpthRk"],
- ["160×320","Slab · 12 mm","1600 × 3200 mm",160,320,"slab160","1wgMbae1sda9tjV6b1GwZ31AtavAje-Sv"]
+ ["30×30","Parking","tx-parking","1NM1vygtPcztXMsaLTX4afWOYhZA2Mwpj"],
+ ["30×45","Wall","tx-wall45","1Fm2A-87mmPGOERQouHXjbMNmMaefIynl"],
+ ["30×60","Wall","tx-wall60","18XkGavd5OHl7nh8c-5fYA0l-Kz6vNyBL"],
+ ["20×120","Plank","tx-plank","1zvst-5COfI7CECKKw4oFgnngV0U6N2Db"],
+ ["60×60","Porcelain","tx-p60","1BNozQYHJwBIqNGDMWQ5NtW39cnlUaVG2"],
+ ["60×120","Full Body · 9 & 15 mm","fullbody-bedroom","1V_H2StGtnsIHXzGI2jzBP53b_KxtOn_m"],
+ ["60×120","Glazed Vitrified","tx-gvt","1L6ZZEiyyB6IU50VQ2dCnx4bFhTyLY6SP"],
+ ["60×120","Porcelain","tx-porc","1-JNmcSq0TEKaBavogf-NzJXAiLIGOZbk"],
+ ["120×180","Slab","slab-kitchen","1idBbDTDYBhKuu123NXzPXqeet0tEDHoj"],
+ ["80×240–320","Slab · 15 mm","tx-slab80","1R8iO58vLtwqGhSAHrxZAkgGpoSRpthRk"],
+ ["160×320","Slab · 12 mm","tx-slab160","1wgMbae1sda9tjV6b1GwZ31AtavAje-Sv"]
 ];
-const fit=(w,h)=>{const r=w/h,bw=.62,bh=.70*1.25;return r>bw/bh?{w:bw*100,h:bw/r/1.25*100}:{w:bh*r*100,h:70}};
-document.getElementById('grid').innerHTML=S.map(r=>{const f=fit(r[3],r[4]);return '<a class="card" href="https://drive.google.com/drive/folders/'+r[6]+'" target="_blank" rel="noopener"><div class="plate"><span class="dim">'+r[2]+'</span><div class="tile" style="width:'+f.w.toFixed(1)+'%;height:'+f.h.toFixed(1)+'%;background-image:url(images/tx-'+r[5]+'.jpg)"></div></div><div class="meta2"><span class="sz">'+r[0]+'</span><span class="ty">'+r[1]+'</span></div><span class="go2">See designs →</span></a>'}).join('')+'<a class="card" href="#contact"><div class="plate" style="background:var(--ch)"><span class="dim" style="color:rgba(247,243,236,.55)">ANY SIZE · ANY FINISH</span><span style="color:var(--cr);font-weight:200;font-size:clamp(40px,5vw,64px)">+</span></div><div class="meta2"><span class="sz">Custom</span><span class="ty">On request</span></div><span class="go2">Ask us →</span></a>';
-document.querySelectorAll('.card').forEach(c=>{const t=c.querySelector('.tile');if(!t)return;
- c.addEventListener('pointermove',e=>{const b=c.querySelector('.plate').getBoundingClientRect();const x=(e.clientX-b.left)/b.width-.5,y=(e.clientY-b.top)/b.height-.5;t.style.setProperty('--ry',(x*10).toFixed(2)+'deg');t.style.setProperty('--rx',(-y*10).toFixed(2)+'deg')});
- c.addEventListener('pointerleave',()=>{t.style.setProperty('--ry','0deg');t.style.setProperty('--rx','0deg')})});
+document.getElementById('grid').innerHTML=S.map(r=>'<a class="card" href="https://drive.google.com/drive/folders/'+r[3]+'" target="_blank" rel="noopener"><img src="images/'+r[2]+'.jpg" alt="'+r[0]+' '+r[1]+'" loading="lazy"><div class="in"><span class="sz">'+r[0]+'</span><span class="ty">'+r[1]+'</span><span class="go2">See designs →</span></div></a>').join('')+'<a class="card cu" href="#contact"><span class="plus">+</span><div class="in"><span class="sz">Custom</span><span class="ty">Any size · Any finish</span></div></a>';
 const hd=document.querySelector('header');const hs=()=>hd.classList.toggle('solid',scrollY>40);addEventListener('scroll',hs,{passive:true});hs();
 const wa=document.querySelector('.wa');const tog=()=>wa.classList.toggle('on',scrollY>innerHeight*.6);addEventListener('scroll',tog,{passive:true});tog();
 document.getElementById('yr').textContent=new Date().getFullYear();
