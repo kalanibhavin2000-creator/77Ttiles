@@ -4,135 +4,115 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>TwinSeven Tiles</title>
-<meta name="description" content="TwinSeven Tiles. Porcelain, vitrified, full body tiles and large-format slabs from Morbi, India.">
+<meta name="description" content="TwinSeven Tiles. Porcelain, vitrified, full body tiles and large-format slabs from Morbi, India. Exporting to 50+ countries.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='400 270 450 360'%3E%3Cpolygon fill='%23B4532F' points='596.04,290 834.85,290 699.2,610 659.08,610 779.44,326.3 596.04,326.3'/%3E%3Cpolygon fill='%232B2724' points='414.55,290 634.25,290 498.61,610 458.49,610 578.85,326.3 414.55,326.3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
-/* VOICE quiet luxury: few words, big surfaces, air
-   IDEA a stone gallery: each section is one surface on display
-   PICTURE full-bleed room photography from TwinSeven catalogues
-   COLOUR/TYPE brand cream, charcoal, one terracotta mark; Jost light, wide-tracked caps for labels
-   LAYOUT full-bleed images, thin rules, generous margins */
+/* VOICE quiet luxury, very few words
+   IDEA a stone showroom: one surface at a time
+   PICTURE full-screen room slider, one video band
+   COLOUR/TYPE white, charcoal, cream on dark, one terracotta accent; Jost light, tracked caps labels
+   LAYOUT slider, typographic collection line, video band, markets, contact */
 :root{--ch:#2B2724;--tc:#B4532F;--cr:#F7F3EC;--wg:#66625E;--line:rgba(43,39,36,.14)}
 *{box-sizing:border-box;margin:0;padding:0;min-width:0}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
 body{font-family:'Jost',system-ui,sans-serif;font-weight:300;color:var(--ch);background:#fff;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
+::selection{background:var(--tc);color:#fff}
 a{color:inherit;text-decoration:none}
-img{display:block;width:100%;height:100%;object-fit:cover}
+img,video{display:block;width:100%;height:100%;object-fit:cover}
+button{font:inherit;cursor:pointer;background:none;border:0;color:inherit}
 .w{max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
 .cap{font-size:12px;letter-spacing:.32em;text-transform:uppercase;font-weight:400}
-.mute{color:var(--wg)}
 .acc{color:var(--tc)}
-::selection{background:var(--tc);color:#fff}
 .more{display:inline-block;font-size:12px;letter-spacing:.32em;text-transform:uppercase;font-weight:400;padding-bottom:6px;border-bottom:1px solid currentColor;transition:color .3s}
 .more:hover{color:var(--tc)}
-.zoom{overflow:hidden}
-.zoom img{transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
-.zoom:hover img{transform:scale(1.04)}
-@media(prefers-reduced-motion:reduce){.zoom img{transition:none}.zoom:hover img{transform:none}}
 
 /* header */
 header{position:fixed;inset:0 0 auto;z-index:50;transition:background .4s,box-shadow .4s}
-header .w{transition:height .4s}
-header .logo svg{transition:height .4s}
+header .w{display:flex;justify-content:space-between;align-items:center;height:96px;transition:height .4s}
+.logo{display:block;position:relative}
+.logo svg{height:36px;width:auto;display:block;transition:opacity .4s,height .4s}
+.logo .lg-l{position:absolute;left:0;top:0}
+.logo .lg-d{opacity:0}
+header nav{display:flex;gap:36px}
+header nav a{color:#fff;transition:color .3s}
 header.solid{background:rgba(255,255,255,.95);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(43,39,36,.08)}
 header.solid .w{height:70px}
 header.solid .logo svg{height:30px}
-header.solid nav a{color:var(--ch);text-shadow:none}
-header.solid nav a:hover{color:var(--tc)}
-header .w{display:flex;justify-content:space-between;align-items:center;height:96px}
-.logo{display:block;position:relative}
-.logo .lg-l{position:absolute;left:0;top:0}
-.logo .lg-d,.logo .lg-l{transition:opacity .4s,height .4s}
-.logo .lg-d{opacity:0}
 header.solid .logo .lg-d{opacity:1}
 header.solid .logo .lg-l{opacity:0}
-.logo svg{height:36px;width:auto;display:block}
-header nav{display:flex;gap:36px}
-header nav a{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.25)}
+header.solid nav a{color:var(--ch)}
+header nav a:hover{color:var(--tc)}
 @media(max-width:700px){header nav a:not(:last-child){display:none}.logo svg{height:28px}}
 
-/* hero */
-.hero{position:relative;height:100svh;min-height:560px;max-height:980px}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,17,15,.55),rgba(20,17,15,.18) 20%,transparent 34%,transparent 55%,rgba(0,0,0,.42))}
-.hero .t{position:absolute;left:0;right:0;bottom:clamp(36px,7vh,72px);z-index:2;color:#fff}
-.hero h1{font-weight:200;font-size:clamp(40px,7vw,104px);line-height:1;letter-spacing:-.01em}
-.hero .t .w{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+/* hero slider */
+.hero{position:relative;height:100svh;min-height:560px;max-height:1000px;overflow:hidden;background:var(--ch);color:#fff}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease}
+.slide.on{opacity:1;z-index:1}
+.slide img{transform:scale(1.08);transition:transform 8s linear}
+.slide.on img{transform:scale(1)}
+.hero::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(20,17,15,.55),rgba(20,17,15,.15) 20%,transparent 36%,transparent 52%,rgba(20,17,15,.5))}
+.hero .txt{position:absolute;left:0;right:0;bottom:clamp(40px,8vh,84px);z-index:3}
+.hero .txt .w{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap}
+.copy{position:relative;min-height:clamp(150px,17vw,230px);flex:1 1 520px}
+.copy div{position:absolute;left:0;bottom:0;opacity:0;transform:translateY(16px);transition:opacity .9s ease,transform .9s ease;pointer-events:none}
+.copy div.on{opacity:1;transform:none;transition-delay:.35s;pointer-events:auto}
+.copy .cap{display:block;margin-bottom:18px;opacity:.9}
+.copy h1{font-weight:200;font-size:clamp(40px,6.4vw,96px);line-height:1;letter-spacing:-.01em;margin-bottom:26px}
+.ctrl{display:flex;align-items:center;gap:22px}
+.count{font-size:13px;letter-spacing:.2em;font-weight:400;white-space:nowrap}
+.count b{font-weight:400}
+.bar{width:90px;height:1px;background:rgba(255,255,255,.3);position:relative;overflow:hidden}
+.bar i{position:absolute;inset:0;background:#fff;transform-origin:left;transform:scaleX(0)}
+.bar i.run{animation:fill 6.5s linear forwards}
+@keyframes fill{to{transform:scaleX(1)}}
+.arr{width:44px;height:44px;border:1px solid rgba(255,255,255,.45);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;transition:background .3s,color .3s}
+.arr:hover{background:#fff;color:var(--ch)}
+@media(max-width:700px){.bar{display:none}.copy{flex-basis:100%}}
+@media(prefers-reduced-motion:reduce){.slide img,.slide.on img{transition:none;transform:none}.bar i.run{animation:none}}
 
-/* statement */
-.st{padding-block:clamp(90px,14vw,180px);text-align:center}
-.st p{font-weight:200;font-size:clamp(26px,3.4vw,46px);line-height:1.25;max-width:900px;margin:0 auto}
-.st .cap{margin-top:34px;display:block}
+/* collections line */
+.col{padding-block:clamp(110px,15vw,190px)}
+.col .cap{display:block;margin-bottom:clamp(28px,4vw,48px)}
+.line{font-weight:200;font-size:clamp(30px,4.4vw,64px);line-height:1.3;letter-spacing:-.005em;max-width:1180px}
+.line a{transition:color .3s;white-space:nowrap}
+.line a:hover,.line a.hl{color:var(--tc)}
+.line .d{color:#C9C4BC;margin:0 .32em;font-weight:200}
+.hint{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:clamp(30px,4vw,50px);padding-top:22px;border-top:1px solid var(--line);color:var(--wg)}
+.hint #ty{min-height:1.6em}
 
-/* pair */
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,28px)}
-.pair a{display:block}
-.pair .zoom{aspect-ratio:4/5}
-.pair .meta{display:flex;justify-content:space-between;align-items:baseline;padding:22px 0 0}
-.pair h2{font-weight:300;font-size:clamp(22px,2.2vw,30px)}
-@media(max-width:700px){.pair{grid-template-columns:1fr;gap:56px}}
+/* video band */
+.vid{position:relative;height:min(86vh,820px);min-height:460px;overflow:hidden;background:var(--ch);color:#fff}
+.vid video{position:absolute;inset:0}
+.vid::after{content:"";position:absolute;inset:0;background:rgba(20,17,15,.28)}
+.vid .t{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:22px;padding:20px}
+.vid h2{font-weight:200;font-size:clamp(40px,6vw,92px);line-height:1.02}
+.vid .cap{opacity:.85}
 
-/* index of sizes */
-.idx{padding-block:clamp(100px,14vw,170px)}
-.idx-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:40px;gap:20px;flex-wrap:wrap}
-.idx h2{font-weight:200;font-size:clamp(34px,4vw,56px);line-height:1}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.2vw,18px)}
-.card{position:relative;display:block;aspect-ratio:3/4;overflow:hidden;background:var(--ch);color:#fff}
-.card img{position:absolute;inset:0;transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
-.card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,17,15,0) 40%,rgba(20,17,15,.72));transition:background .6s}
-.card:hover img{transform:scale(1.06)}
-.card:hover::after{background:linear-gradient(180deg,rgba(20,17,15,.08) 30%,rgba(20,17,15,.72))}
-.card .in{position:absolute;left:clamp(16px,1.6vw,24px);right:clamp(16px,1.6vw,24px);bottom:clamp(16px,1.6vw,22px);z-index:1}
-.card .sz{display:block;font-weight:200;font-size:clamp(26px,2.4vw,36px);line-height:1.05;white-space:nowrap}
-.card .ty{display:block;font-size:11px;letter-spacing:.26em;text-transform:uppercase;margin-top:8px;opacity:.85}
-.card .go2{display:block;font-size:11px;letter-spacing:.26em;text-transform:uppercase;margin-top:14px;max-height:0;opacity:0;transition:opacity .5s,max-height .5s}
-.card:hover .go2{opacity:1;max-height:20px}
-@media(hover:none){.card .go2{display:none}}
-.card.cu{background:var(--ch)}
-.card.cu::after{display:none}
-.card.cu .plus{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:200;font-size:clamp(40px,5vw,64px);color:var(--cr)}
-@media(max-width:1000px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card .ty{font-size:10px;letter-spacing:.2em}}
-@media(prefers-reduced-motion:reduce){.card img{transition:none}.card:hover img{transform:none}}
-
-/* full bleed */
-.bleed{height:min(92vh,860px)}
-
-/* gallery */
-.gal{padding:clamp(100px,14vw,170px) 0 0}
-.gal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
-.gbtn{display:flex;gap:10px}
-.gbtn button{width:46px;height:46px;border:1px solid var(--line);background:none;color:var(--ch);font:inherit;font-size:18px;cursor:pointer;transition:.3s}
-.gbtn button:hover{background:var(--ch);color:var(--cr)}
-.strip{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0 clamp(20px,4vw,48px)}
-.strip::-webkit-scrollbar{display:none}
-.strip figure{flex:none;height:clamp(320px,52vw,600px);scroll-snap-align:start}
-.strip img{width:auto;height:100%}
-
-/* reach */
-.reach{padding-block:clamp(100px,14vw,170px);text-align:center}
-.reach ul{list-style:none;display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(20px,5vw,80px);font-weight:200;font-size:clamp(24px,3vw,40px)}
-.reach .cap{display:block;margin-top:30px}
+/* markets */
+.reach{padding-block:clamp(100px,13vw,160px);text-align:center}
+.reach p{font-weight:200;font-size:clamp(22px,2.6vw,34px);line-height:1.35;max-width:820px;margin:0 auto clamp(40px,5vw,60px)}
+.reach ul{list-style:none;display:flex;justify-content:center;flex-wrap:wrap;gap:clamp(20px,5vw,80px);font-weight:200;font-size:clamp(22px,2.6vw,36px)}
+.reach .cap{display:block;margin-top:28px}
 
 /* contact */
+.ct{position:relative;overflow:hidden;background:var(--ch);color:var(--cr);padding:clamp(100px,13vw,160px) 0 50px}
 .ct .map{position:absolute;right:-6%;top:clamp(20px,3vw,50px);width:min(82%,1250px);height:auto;pointer-events:none}
 .ct .w{position:relative;z-index:1}
-@media(max-width:700px){.ct .map{width:210%;right:-45%;top:30px;opacity:.6}}
-.ct{position:relative;overflow:hidden;background:var(--ch);color:var(--cr);padding:clamp(100px,13vw,160px) 0 50px}
 .ct h2{font-weight:200;font-size:clamp(44px,7vw,104px);line-height:1;margin-bottom:clamp(50px,7vw,90px)}
 .ct-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;border-top:1px solid rgba(247,243,236,.18);padding-top:34px}
 .ct-g .cap{color:rgba(247,243,236,.55);display:block;margin-bottom:10px}
 .ct-g a,.ct-g span{font-size:clamp(18px,1.7vw,22px);font-weight:300}
 .ct-g a:hover{color:#E08A66}
-.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-top:clamp(80px,10vw,130px);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(247,243,236,.55)}
+.foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-top:clamp(80px,10vw,130px);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(247,243,236,.55)}
 .foot svg{height:26px;width:auto}
-@media(max-width:700px){.ct-g{grid-template-columns:1fr}}
+@media(max-width:700px){.ct-g{grid-template-columns:1fr}.ct .map{width:210%;right:-45%;top:30px;opacity:.6}}
 
-.wa{position:fixed;right:22px;bottom:22px;width:52px;height:52px;border-radius:50%;background:var(--ch);display:flex;align-items:center;justify-content:center;z-index:60;box-shadow:0 6px 20px rgba(0,0,0,.18);transition:background .3s}
+.wa{position:fixed;right:22px;bottom:22px;width:52px;height:52px;border-radius:50%;background:var(--ch);display:flex;align-items:center;justify-content:center;z-index:60;box-shadow:0 6px 20px rgba(0,0,0,.18);opacity:0;pointer-events:none;transition:opacity .4s,background .3s}
+.wa.on{opacity:1;pointer-events:auto}
 .wa:hover{background:var(--tc)}
-.wa{opacity:0;pointer-events:none;transition:opacity .4s,background .3s}.wa.on{opacity:1;pointer-events:auto}
 .wa svg{width:24px;height:24px;fill:var(--cr)}
 </style>
 </head>
@@ -142,70 +122,54 @@ header nav a{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.25)}
   <div class="w">
     <a href="#" class="logo" aria-label="TwinSeven Tiles"><svg class="lg-d" xmlns="http://www.w3.org/2000/svg" viewBox="400 270 1590 360" role="img" aria-label="TwinSeven Tiles"><polygon fill="#B4532F" points="596.04,290.00 834.85,290.00 699.20,610.00 659.08,610.00 779.44,326.30 596.04,326.30"/><polygon fill="#2B2724" points="414.55,290.00 634.25,290.00 498.61,610.00 458.49,610.00 578.85,326.30 414.55,326.30"/><rect fill="#2B2724" x="924.85" y="280.00" width="6" height="340"/><path fill="#2B2724" d="M1021.8052537313433 375.32H1045.4852537313434V451.0H1060.6852537313432V375.32H1084.3652537313433V361.4H1021.8052537313433Z M1204.5892537313434 421.368 1178.7972537313433 356.92 1153.3892537313434 421.368 1132.0772537313433 361.4H1114.4772537313434L1151.1172537313432 455.8L1178.7972537313433 392.44L1206.4772537313434 455.8L1243.1172537313432 361.4H1225.5172537313433Z M1282.1572537313434 361.4V451.0H1297.5172537313433V361.4Z M1410.9572537313431 361.4V421.56L1345.5172537313433 356.92V451.0H1360.3972537313432V390.84L1425.8372537313433 455.48V361.4Z M1479.8532537313433 422.136 1468.5892537313432 430.008Q1471.5652537313433 436.12 1476.5732537313434 441.384Q1481.5812537313432 446.648 1488.3012537313432 449.784Q1495.0212537313432 452.92 1502.8932537313433 452.92Q1508.6532537313433 452.92 1513.9812537313433 451.096Q1519.3092537313432 449.272 1523.5332537313434 445.84799999999996Q1527.7572537313433 442.424 1530.2052537313434 437.448Q1532.6532537313433 432.472 1532.6532537313433 426.2Q1532.6532537313433 420.28 1530.6372537313432 415.89599999999996Q1528.6212537313434 411.512 1525.3252537313433 408.296Q1522.0292537313433 405.08 1517.9972537313433 402.88800000000003Q1513.9652537313432 400.696 1509.9332537313433 399.256Q1502.7652537313434 396.76 1498.2692537313433 394.328Q1493.7732537313432 391.896 1491.6772537313432 389.11199999999997Q1489.5812537313432 386.328 1489.5812537313432 382.872Q1489.5812537313432 379.06399999999996 1492.5412537313432 376.168Q1495.5012537313432 373.272 1501.7092537313433 373.272Q1506.2532537313432 373.272 1509.6292537313432 375.03200000000004Q1513.0052537313431 376.79200000000003 1515.5492537313432 379.656Q1518.0932537313433 382.52 1519.8532537313433 385.81600000000003L1532.0772537313433 378.904Q1529.8372537313433 374.2 1525.7892537313433 369.832Q1521.7412537313432 365.464 1515.853253731343 362.632Q1509.9652537313432 359.8 1501.9652537313432 359.8Q1493.9652537313432 359.8 1487.5972537313432 362.824Q1481.2292537313433 365.848 1477.5492537313432 371.288Q1473.8692537313432 376.728 1473.8692537313432 383.928Q1473.8692537313432 390.23199999999997 1476.2692537313433 394.648Q1478.6692537313434 399.064 1482.3972537313434 402.088Q1486.1252537313433 405.112 1490.2372537313431 407.048Q1494.3492537313432 408.984 1497.6452537313432 410.168Q1503.3092537313432 412.216 1507.6132537313433 414.312Q1511.9172537313432 416.408 1514.3332537313431 419.416Q1516.7492537313433 422.424 1516.7492537313433 427.384Q1516.7492537313433 432.728 1512.9092537313431 436.03999999999996Q1509.0692537313432 439.352 1502.8612537313434 439.352Q1497.8372537313433 439.352 1493.6932537313432 437.20799999999997Q1489.5492537313432 435.064 1486.1732537313433 431.17600000000004Q1482.7972537313433 427.288 1479.8532537313433 422.136Z M1585.5492537313432 451.0H1630.7332537313432V437.72H1585.5492537313432ZM1585.5492537313432 374.68H1630.7332537313432V361.4H1585.5492537313432ZM1585.5492537313432 409.56H1628.1732537313433V396.44H1585.5492537313432ZM1576.1732537313433 361.4V451.0H1591.0532537313431V361.4Z M1711.6612537313433 424.376 1685.2612537313432 361.4H1667.8212537313432L1711.6612537313433 455.96L1755.5012537313432 361.4H1738.0612537313432Z M1803.2772537313433 451.0H1848.4612537313433V437.72H1803.2772537313433ZM1803.2772537313433 374.68H1848.4612537313433V361.4H1803.2772537313433ZM1803.2772537313433 409.56H1845.9012537313433V396.44H1803.2772537313433ZM1793.9012537313433 361.4V451.0H1808.7812537313432V361.4Z M1960.5892537313432 361.4V421.56L1895.1492537313434 356.92V451.0H1910.0292537313433V390.84L1975.4692537313433 455.48V361.4Z"/><path fill="#2B2724" d="M1577.2832537313434 498.39500000000004H1589.8632537313433V538.6H1597.9382537313434V498.39500000000004H1610.5182537313435V491.0H1577.2832537313434Z M1677.5152537313434 491.0V538.6H1685.6752537313434V491.0Z M1757.4152537313435 491.0V538.6H1784.3602537313434V531.375H1765.4902537313435V491.0Z M1856.3042537313434 538.6H1880.3082537313435V531.5450000000001H1856.3042537313434ZM1856.3042537313434 498.055H1880.3082537313435V491.0H1856.3042537313434ZM1856.3042537313434 516.585H1878.9482537313434V509.615H1856.3042537313434ZM1851.3232537313434 491.0V538.6H1859.2282537313433V491.0Z M1954.5132537313434 523.2660000000001 1948.5292537313435 527.448Q1950.1102537313434 530.695 1952.7707537313433 533.4915000000001Q1955.4312537313433 536.288 1959.0012537313432 537.954Q1962.5712537313434 539.62 1966.7532537313434 539.62Q1969.8132537313434 539.62 1972.6437537313434 538.6510000000001Q1975.4742537313434 537.682 1977.7182537313433 535.863Q1979.9622537313435 534.044 1981.2627537313433 531.4005Q1982.5632537313434 528.7570000000001 1982.5632537313434 525.4250000000001Q1982.5632537313434 522.28 1981.4922537313432 519.951Q1980.4212537313433 517.6220000000001 1978.6702537313433 515.9135000000001Q1976.9192537313434 514.205 1974.7772537313435 513.0405000000001Q1972.6352537313435 511.87600000000003 1970.4932537313434 511.11100000000005Q1966.6852537313434 509.785 1964.2967537313434 508.49300000000005Q1961.9082537313434 507.201 1960.7947537313435 505.72200000000004Q1959.6812537313433 504.24300000000005 1959.6812537313433 502.40700000000004Q1959.6812537313433 500.384 1961.2537537313433 498.8455Q1962.8262537313433 497.307 1966.1242537313433 497.307Q1968.5382537313435 497.307 1970.3317537313435 498.242Q1972.1252537313435 499.177 1973.4767537313435 500.6985Q1974.8282537313435 502.22 1975.7632537313434 503.971L1982.2572537313433 500.29900000000004Q1981.0672537313435 497.8 1978.9167537313433 495.47950000000003Q1976.7662537313433 493.159 1973.6382537313434 491.6545Q1970.5102537313435 490.15000000000003 1966.2602537313435 490.15000000000003Q1962.0102537313435 490.15000000000003 1958.6272537313434 491.7565Q1955.2442537313434 493.363 1953.2892537313433 496.25300000000004Q1951.3342537313433 499.14300000000003 1951.3342537313433 502.968Q1951.3342537313433 506.317 1952.6092537313434 508.663Q1953.8842537313435 511.009 1955.8647537313434 512.6155Q1957.8452537313433 514.222 1960.0297537313434 515.2505Q1962.2142537313434 516.279 1963.9652537313434 516.908Q1966.9742537313434 517.996 1969.2607537313434 519.1095Q1971.5472537313433 520.2230000000001 1972.8307537313433 521.821Q1974.1142537313433 523.419 1974.1142537313433 526.054Q1974.1142537313433 528.893 1972.0742537313433 530.6525Q1970.0342537313434 532.412 1966.7362537313434 532.412Q1964.0672537313435 532.412 1961.8657537313434 531.273Q1959.6642537313435 530.134 1957.8707537313435 528.0685000000001Q1956.0772537313435 526.003 1954.5132537313434 523.2660000000001Z"/></svg><svg class="lg-l" xmlns="http://www.w3.org/2000/svg" viewBox="400 270 1590 360" role="img" aria-label="TwinSeven Tiles"><polygon fill="#B4532F" points="596.04,290.00 834.85,290.00 699.20,610.00 659.08,610.00 779.44,326.30 596.04,326.30"/><polygon fill="#FFFFFF" points="414.55,290.00 634.25,290.00 498.61,610.00 458.49,610.00 578.85,326.30 414.55,326.30"/><rect fill="#FFFFFF" x="924.85" y="280.00" width="6" height="340"/><path fill="#FFFFFF" d="M1021.8052537313433 375.32H1045.4852537313434V451.0H1060.6852537313432V375.32H1084.3652537313433V361.4H1021.8052537313433Z M1204.5892537313434 421.368 1178.7972537313433 356.92 1153.3892537313434 421.368 1132.0772537313433 361.4H1114.4772537313434L1151.1172537313432 455.8L1178.7972537313433 392.44L1206.4772537313434 455.8L1243.1172537313432 361.4H1225.5172537313433Z M1282.1572537313434 361.4V451.0H1297.5172537313433V361.4Z M1410.9572537313431 361.4V421.56L1345.5172537313433 356.92V451.0H1360.3972537313432V390.84L1425.8372537313433 455.48V361.4Z M1479.8532537313433 422.136 1468.5892537313432 430.008Q1471.5652537313433 436.12 1476.5732537313434 441.384Q1481.5812537313432 446.648 1488.3012537313432 449.784Q1495.0212537313432 452.92 1502.8932537313433 452.92Q1508.6532537313433 452.92 1513.9812537313433 451.096Q1519.3092537313432 449.272 1523.5332537313434 445.84799999999996Q1527.7572537313433 442.424 1530.2052537313434 437.448Q1532.6532537313433 432.472 1532.6532537313433 426.2Q1532.6532537313433 420.28 1530.6372537313432 415.89599999999996Q1528.6212537313434 411.512 1525.3252537313433 408.296Q1522.0292537313433 405.08 1517.9972537313433 402.88800000000003Q1513.9652537313432 400.696 1509.9332537313433 399.256Q1502.7652537313434 396.76 1498.2692537313433 394.328Q1493.7732537313432 391.896 1491.6772537313432 389.11199999999997Q1489.5812537313432 386.328 1489.5812537313432 382.872Q1489.5812537313432 379.06399999999996 1492.5412537313432 376.168Q1495.5012537313432 373.272 1501.7092537313433 373.272Q1506.2532537313432 373.272 1509.6292537313432 375.03200000000004Q1513.0052537313431 376.79200000000003 1515.5492537313432 379.656Q1518.0932537313433 382.52 1519.8532537313433 385.81600000000003L1532.0772537313433 378.904Q1529.8372537313433 374.2 1525.7892537313433 369.832Q1521.7412537313432 365.464 1515.853253731343 362.632Q1509.9652537313432 359.8 1501.9652537313432 359.8Q1493.9652537313432 359.8 1487.5972537313432 362.824Q1481.2292537313433 365.848 1477.5492537313432 371.288Q1473.8692537313432 376.728 1473.8692537313432 383.928Q1473.8692537313432 390.23199999999997 1476.2692537313433 394.648Q1478.6692537313434 399.064 1482.3972537313434 402.088Q1486.1252537313433 405.112 1490.2372537313431 407.048Q1494.3492537313432 408.984 1497.6452537313432 410.168Q1503.3092537313432 412.216 1507.6132537313433 414.312Q1511.9172537313432 416.408 1514.3332537313431 419.416Q1516.7492537313433 422.424 1516.7492537313433 427.384Q1516.7492537313433 432.728 1512.9092537313431 436.03999999999996Q1509.0692537313432 439.352 1502.8612537313434 439.352Q1497.8372537313433 439.352 1493.6932537313432 437.20799999999997Q1489.5492537313432 435.064 1486.1732537313433 431.17600000000004Q1482.7972537313433 427.288 1479.8532537313433 422.136Z M1585.5492537313432 451.0H1630.7332537313432V437.72H1585.5492537313432ZM1585.5492537313432 374.68H1630.7332537313432V361.4H1585.5492537313432ZM1585.5492537313432 409.56H1628.1732537313433V396.44H1585.5492537313432ZM1576.1732537313433 361.4V451.0H1591.0532537313431V361.4Z M1711.6612537313433 424.376 1685.2612537313432 361.4H1667.8212537313432L1711.6612537313433 455.96L1755.5012537313432 361.4H1738.0612537313432Z M1803.2772537313433 451.0H1848.4612537313433V437.72H1803.2772537313433ZM1803.2772537313433 374.68H1848.4612537313433V361.4H1803.2772537313433ZM1803.2772537313433 409.56H1845.9012537313433V396.44H1803.2772537313433ZM1793.9012537313433 361.4V451.0H1808.7812537313432V361.4Z M1960.5892537313432 361.4V421.56L1895.1492537313434 356.92V451.0H1910.0292537313433V390.84L1975.4692537313433 455.48V361.4Z"/><path fill="#FFFFFF" d="M1577.2832537313434 498.39500000000004H1589.8632537313433V538.6H1597.9382537313434V498.39500000000004H1610.5182537313435V491.0H1577.2832537313434Z M1677.5152537313434 491.0V538.6H1685.6752537313434V491.0Z M1757.4152537313435 491.0V538.6H1784.3602537313434V531.375H1765.4902537313435V491.0Z M1856.3042537313434 538.6H1880.3082537313435V531.5450000000001H1856.3042537313434ZM1856.3042537313434 498.055H1880.3082537313435V491.0H1856.3042537313434ZM1856.3042537313434 516.585H1878.9482537313434V509.615H1856.3042537313434ZM1851.3232537313434 491.0V538.6H1859.2282537313433V491.0Z M1954.5132537313434 523.2660000000001 1948.5292537313435 527.448Q1950.1102537313434 530.695 1952.7707537313433 533.4915000000001Q1955.4312537313433 536.288 1959.0012537313432 537.954Q1962.5712537313434 539.62 1966.7532537313434 539.62Q1969.8132537313434 539.62 1972.6437537313434 538.6510000000001Q1975.4742537313434 537.682 1977.7182537313433 535.863Q1979.9622537313435 534.044 1981.2627537313433 531.4005Q1982.5632537313434 528.7570000000001 1982.5632537313434 525.4250000000001Q1982.5632537313434 522.28 1981.4922537313432 519.951Q1980.4212537313433 517.6220000000001 1978.6702537313433 515.9135000000001Q1976.9192537313434 514.205 1974.7772537313435 513.0405000000001Q1972.6352537313435 511.87600000000003 1970.4932537313434 511.11100000000005Q1966.6852537313434 509.785 1964.2967537313434 508.49300000000005Q1961.9082537313434 507.201 1960.7947537313435 505.72200000000004Q1959.6812537313433 504.24300000000005 1959.6812537313433 502.40700000000004Q1959.6812537313433 500.384 1961.2537537313433 498.8455Q1962.8262537313433 497.307 1966.1242537313433 497.307Q1968.5382537313435 497.307 1970.3317537313435 498.242Q1972.1252537313435 499.177 1973.4767537313435 500.6985Q1974.8282537313435 502.22 1975.7632537313434 503.971L1982.2572537313433 500.29900000000004Q1981.0672537313435 497.8 1978.9167537313433 495.47950000000003Q1976.7662537313433 493.159 1973.6382537313434 491.6545Q1970.5102537313435 490.15000000000003 1966.2602537313435 490.15000000000003Q1962.0102537313435 490.15000000000003 1958.6272537313434 491.7565Q1955.2442537313434 493.363 1953.2892537313433 496.25300000000004Q1951.3342537313433 499.14300000000003 1951.3342537313433 502.968Q1951.3342537313433 506.317 1952.6092537313434 508.663Q1953.8842537313435 511.009 1955.8647537313434 512.6155Q1957.8452537313433 514.222 1960.0297537313434 515.2505Q1962.2142537313434 516.279 1963.9652537313434 516.908Q1966.9742537313434 517.996 1969.2607537313434 519.1095Q1971.5472537313433 520.2230000000001 1972.8307537313433 521.821Q1974.1142537313433 523.419 1974.1142537313433 526.054Q1974.1142537313433 528.893 1972.0742537313433 530.6525Q1970.0342537313434 532.412 1966.7362537313434 532.412Q1964.0672537313435 532.412 1961.8657537313434 531.273Q1959.6642537313435 530.134 1957.8707537313435 528.0685000000001Q1956.0772537313435 526.003 1954.5132537313434 523.2660000000001Z"/></svg></a>
     <nav class="cap">
-      <a href="#sizes">Collections</a>
+      <a href="#collections">Collections</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
 </header>
 
-<section class="hero">
-  <img src="images/hero-living.jpg" alt="Living room finished in large marble-look slabs">
-  <div class="t">
+<section class="hero" id="hero" aria-roledescription="carousel">
+  <div class="slide on"><img src="images/hero-living.jpg" alt="Living room in marble-look slabs"></div>
+  <div class="slide"><img src="images/hero-kitchen.jpg" alt="White marble-look kitchen floor" loading="lazy"></div>
+  <div class="slide"><img src="images/hero-bedroom.jpg" alt="Bedroom in grey full body tiles" loading="lazy"></div>
+  <div class="slide"><img src="images/hero-store.jpg" alt="Store with grey stone-look floor" loading="lazy"></div>
+  <div class="slide"><img src="images/hero-outdoor.jpg" alt="Outdoor dining on full body tiles" loading="lazy"></div>
+  <div class="txt">
     <div class="w">
-      <h1>Surfaces,<br>made to last.</h1>
-      <a class="more" href="#sizes">Explore</a>
+      <div class="copy">
+        <div class="on"><span class="cap">Slabs · 120×180</span><h1>Surfaces,<br>made to last.</h1><a class="more" href="#collections">Explore</a></div>
+        <div><span class="cap">Slabs · 120×180</span><h1>White,<br>edge to edge.</h1><a class="more" href="https://drive.google.com/drive/folders/1idBbDTDYBhKuu123NXzPXqeet0tEDHoj" target="_blank" rel="noopener">See designs</a></div>
+        <div><span class="cap">Full Body · 9 &amp; 15 mm</span><h1>Solid,<br>all the way through.</h1><a class="more" href="https://drive.google.com/drive/folders/1V_H2StGtnsIHXzGI2jzBP53b_KxtOn_m" target="_blank" rel="noopener">See designs</a></div>
+        <div><span class="cap">Commercial</span><h1>Made for<br>busy floors.</h1><a class="more" href="#collections">Explore</a></div>
+        <div><span class="cap">Outdoor</span><h1>Inside,<br>and out.</h1><a class="more" href="https://drive.google.com/drive/folders/1V_H2StGtnsIHXzGI2jzBP53b_KxtOn_m" target="_blank" rel="noopener">See designs</a></div>
+      </div>
+      <div class="ctrl">
+        <span class="count"><b id="cur">01</b> / 05</span>
+        <span class="bar"><i id="bar"></i></span>
+        <button class="arr" id="prev" aria-label="Previous slide">←</button>
+        <button class="arr" id="next" aria-label="Next slide">→</button>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="st w">
-  <p>Porcelain tiles and large-format slabs, chosen in Morbi and delivered worldwide.</p>
-  <span class="cap acc">Morbi · India</span>
+<section class="col w" id="collections">
+  <span class="cap acc">Collections</span>
+  <div class="line" id="line"></div>
+  <div class="hint"><span class="cap" id="ty">Select a size</span><a class="more" href="#contact">Custom sizes on request</a></div>
 </section>
 
-<section class="w pair">
-  <a href="https://drive.google.com/drive/folders/1idBbDTDYBhKuu123NXzPXqeet0tEDHoj" target="_blank" rel="noopener">
-    <div class="zoom"><img src="images/slab-kitchen.jpg" alt="Kitchen floor in white marble-look slabs" loading="lazy"></div>
-    <div class="meta"><h2>Slabs</h2><span class="cap acc">120×180 cm</span></div>
-  </a>
-  <a href="https://drive.google.com/drive/folders/1V_H2StGtnsIHXzGI2jzBP53b_KxtOn_m" target="_blank" rel="noopener">
-    <div class="zoom"><img src="images/fullbody-bedroom.jpg" alt="Bedroom in grey full body tiles" loading="lazy"></div>
-    <div class="meta"><h2>Full Body</h2><span class="cap acc">9 · 15 mm</span></div>
-  </a>
-</section>
-
-<section class="idx w" id="sizes">
-  <div class="idx-head">
-    <h2>Collections</h2>
-    <span class="cap acc">Select a size</span>
-  </div>
-  <div class="grid" id="grid"></div>
-</section>
-
-<div class="bleed zoom"><img src="images/g-a14.jpg" alt="Store interior with grey stone-look floor" loading="lazy"></div>
-
-<section class="gal">
-  <div class="w gal-head">
-    <span class="cap acc">Spaces</span>
-    <div class="gbtn"><button id="prev" aria-label="Previous">←</button><button id="next" aria-label="Next">→</button></div>
-  </div>
-  <div class="strip" id="strip">
-    <figure><img src="images/g-b5.jpg" alt="Living room in white tiles" loading="lazy"></figure>
-    <figure><img src="images/g-a16.jpg" alt="Lounge with beige slabs" loading="lazy"></figure>
-    <figure><img src="images/g-b6.jpg" alt="Bedroom with black feature wall" loading="lazy"></figure>
-    <figure><img src="images/g-a18.jpg" alt="Office floor" loading="lazy"></figure>
-    <figure><img src="images/g-b10.jpg" alt="Staircase and living area" loading="lazy"></figure>
-    <figure><img src="images/g-a20.jpg" alt="Boutique floor" loading="lazy"></figure>
-    <figure><img src="images/g-b12.jpg" alt="Dark grey floor" loading="lazy"></figure>
-    <figure><img src="images/fullbody-bath.jpg" alt="Beige bathroom" loading="lazy"></figure>
-    <figure><img src="images/g-b17.jpg" alt="Outdoor dining" loading="lazy"></figure>
-    <figure><img src="images/g-b18.jpg" alt="Grey living area" loading="lazy"></figure>
+<section class="vid">
+  <video autoplay muted loop playsinline preload="metadata" poster="images/loop-poster.jpg"><source src="images/loop.mp4" type="video/mp4"></video>
+  <div class="t">
+    <h2>Made in Morbi.</h2>
+    <span class="cap">Exporting to 50+ countries</span>
   </div>
 </section>
 
 <section class="reach w">
+  <p>Porcelain tiles and large-format slabs, chosen in Morbi and delivered worldwide.</p>
   <ul><li>India</li><li>GCC</li><li>Africa</li><li>Europe</li></ul>
-  <span class="cap acc">Exporting to 50+ countries</span>
 </section>
 
 <section class="ct" id="contact">
@@ -221,32 +185,58 @@ header nav a{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.25)}
   </div>
 </section>
 
-<a class="wa" href="https://wa.me/919751946677" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 32 32"><path d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.2.6 4.4 1.7 6.3L3 29l7.3-1.9c1.8 1 3.8 1.5 5.8 1.5 7 0 12.7-5.6 12.7-12.6S23 3 16 3zm0 23.1c-1.9 0-3.7-.5-5.300-1.4l-.4-.2-4.3 1.1 1.2-4.2-.3-.4c-1-1.6-1.5-3.5-1.5-5.4 0-5.8 4.8-10.5 10.6-10.5s10.6 4.7 10.6 10.5S21.8 26.1 16 26.1zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.900-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.8 5 .8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg></a>
+<a class="wa" href="https://wa.me/919751946677" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 32 32"><path d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.2.6 4.4 1.7 6.3L3 29l7.3-1.9c1.8 1 3.8 1.5 5.8 1.5 7 0 12.7-5.6 12.7-12.6S23 3 16 3zm0 23.1c-1.9 0-3.7-.5-5.3-1.4l-.4-.2-4.3 1.1 1.2-4.2-.3-.4c-1-1.6-1.5-3.5-1.5-5.4 0-5.8 4.8-10.5 10.6-10.5s10.6 4.7 10.6 10.5S21.8 26.1 16 26.1zm5.8-7.9c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.8 5 .8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.4z"/></svg></a>
 
 <script>
 {
-const S=[
- ["30×30","Parking","tx-parking","1NM1vygtPcztXMsaLTX4afWOYhZA2Mwpj"],
- ["30×45","Wall","tx-wall45","1Fm2A-87mmPGOERQouHXjbMNmMaefIynl"],
- ["30×60","Wall","tx-wall60","18XkGavd5OHl7nh8c-5fYA0l-Kz6vNyBL"],
- ["20×120","Plank","tx-plank","1zvst-5COfI7CECKKw4oFgnngV0U6N2Db"],
- ["60×60","Porcelain","tx-p60","1BNozQYHJwBIqNGDMWQ5NtW39cnlUaVG2"],
- ["60×120","Full Body · 9 & 15 mm","fullbody-bedroom","1V_H2StGtnsIHXzGI2jzBP53b_KxtOn_m"],
- ["60×120","Glazed Vitrified","tx-gvt","1L6ZZEiyyB6IU50VQ2dCnx4bFhTyLY6SP"],
- ["60×120","Porcelain","tx-porc","1-JNmcSq0TEKaBavogf-NzJXAiLIGOZbk"],
- ["120×180","Slab","slab-kitchen","1idBbDTDYBhKuu123NXzPXqeet0tEDHoj"],
- ["80×240–320","Slab · 15 mm","tx-slab80","1R8iO58vLtwqGhSAHrxZAkgGpoSRpthRk"],
- ["160×320","Slab · 12 mm","tx-slab160","1wgMbae1sda9tjV6b1GwZ31AtavAje-Sv"]
+// collections: [label, type shown on hover, Drive folder id]
+const C=[
+ ["30×30","Parking tiles","1NM1vygtPcztXMsaLTX4afWOYhZA2Mwpj"],
+ ["30×45","Wall tiles","1Fm2A-87mmPGOERQouHXjbMNmMaefIynl"],
+ ["30×60","Wall tiles","18XkGavd5OHl7nh8c-5fYA0l-Kz6vNyBL"],
+ ["20×120","Wood-look planks","1zvst-5COfI7CECKKw4oFgnngV0U6N2Db"],
+ ["60×60","Porcelain","1BNozQYHJwBIqNGDMWQ5NtW39cnlUaVG2"],
+ ["60×120","Glazed vitrified","1L6ZZEiyyB6IU50VQ2dCnx4bFhTyLY6SP"],
+ ["Porcelain","60×120 · Water absorption ≤ 2%","1-JNmcSq0TEKaBavogf-NzJXAiLIGOZbk"],
+ ["Full Body","60×60 · 60×120 · 9 & 15 mm","1V_H2StGtnsIHXzGI2jzBP53b_KxtOn_m"],
+ ["120×180","Slabs","1idBbDTDYBhKuu123NXzPXqeet0tEDHoj"],
+ ["80×320","Slabs · 15 mm · 240 / 300 / 320 cm","1R8iO58vLtwqGhSAHrxZAkgGpoSRpthRk"],
+ ["160×320","Slabs · 12 mm","1wgMbae1sda9tjV6b1GwZ31AtavAje-Sv"]
 ];
-document.getElementById('grid').innerHTML=S.map(r=>'<a class="card" href="https://drive.google.com/drive/folders/'+r[3]+'" target="_blank" rel="noopener"><img src="images/'+r[2]+'.jpg" alt="'+r[0]+' '+r[1]+'" loading="lazy"><div class="in"><span class="sz">'+r[0]+'</span><span class="ty">'+r[1]+'</span><span class="go2">See designs →</span></div></a>').join('')+'<a class="card cu" href="#contact"><span class="plus">+</span><div class="in"><span class="sz">Custom</span><span class="ty">Any size · Any finish</span></div></a>';
-const hd=document.querySelector('header');const hs=()=>hd.classList.toggle('solid',scrollY>40);addEventListener('scroll',hs,{passive:true});hs();
-const wa=document.querySelector('.wa');const tog=()=>wa.classList.toggle('on',scrollY>innerHeight*.6);addEventListener('scroll',tog,{passive:true});tog();
+const line=document.getElementById('line'),ty=document.getElementById('ty');
+line.innerHTML=C.map((c,i)=>'<a href="https://drive.google.com/drive/folders/'+c[2]+'" target="_blank" rel="noopener" data-i="'+i+'">'+c[0]+'</a>').join(' <span class="d">·</span> ');
+line.querySelectorAll('a').forEach(a=>{
+  const show=()=>{ty.textContent=C[a.dataset.i][1];ty.classList.add('acc')};
+  const hide=()=>{ty.textContent='Select a size';ty.classList.remove('acc')};
+  a.addEventListener('mouseenter',show);a.addEventListener('focus',show);
+  a.addEventListener('mouseleave',hide);a.addEventListener('blur',hide);
+});
+
+// slider
+const slides=[...document.querySelectorAll('.slide')],copies=[...document.querySelectorAll('.copy > div')];
+const cur=document.getElementById('cur'),bar=document.getElementById('bar');
+let i=0,timer;
+const go=n=>{
+  slides[i].classList.remove('on');copies[i].classList.remove('on');
+  i=(n+slides.length)%slides.length;
+  slides[i].classList.add('on');copies[i].classList.add('on');
+  cur.textContent=String(i+1).padStart(2,'0');
+  bar.classList.remove('run');void bar.offsetWidth;bar.classList.add('run');
+  clearTimeout(timer);timer=setTimeout(()=>go(i+1),6500);
+};
+document.getElementById('prev').addEventListener('click',()=>go(i-1));
+document.getElementById('next').addEventListener('click',()=>go(i+1));
+addEventListener('keydown',e=>{if(scrollY<innerHeight*.8){if(e.key==='ArrowRight')go(i+1);if(e.key==='ArrowLeft')go(i-1)}});
+let sx=null;const hero=document.getElementById('hero');
+hero.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+hero.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)go(i+(dx<0?1:-1));sx=null});
+go(0);
+
+// header + whatsapp
+const hd=document.querySelector('header'),wa=document.querySelector('.wa');
+const onScroll=()=>{hd.classList.toggle('solid',scrollY>40);wa.classList.toggle('on',scrollY>innerHeight*.6)};
+addEventListener('scroll',onScroll,{passive:true});onScroll();
 document.getElementById('yr').textContent=new Date().getFullYear();
-const st=document.getElementById('strip');
-const step=d=>{const f=st.querySelector('figure');st.scrollBy({left:d*((f?f.offsetWidth:400)+16),behavior:'smooth'})};
-document.getElementById('prev').addEventListener('click',()=>step(-1));
-document.getElementById('next').addEventListener('click',()=>step(1));
-st.tabIndex=0;st.addEventListener('keydown',e=>{if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1)});
 }
 </script>
 </body>
