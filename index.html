@@ -15,7 +15,7 @@
    PICTURE full-bleed room photography from TwinSeven catalogues
    COLOUR/TYPE brand cream, charcoal, one terracotta mark; Jost light, wide-tracked caps for labels
    LAYOUT full-bleed images, thin rules, generous margins */
-:root{--ch:#2B2724;--tc:#B4532F;--cr:#F7F3EC;--wg:#7A756F;--line:rgba(43,39,36,.14)}
+:root{--ch:#2B2724;--tc:#B4532F;--cr:#F7F3EC;--wg:#66625E;--line:rgba(43,39,36,.14)}
 *{box-sizing:border-box;margin:0;padding:0;min-width:0}
 html{scroll-behavior:smooth;scroll-padding-top:70px}
 body{font-family:'Jost',system-ui,sans-serif;font-weight:300;color:var(--ch);background:#fff;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:clip}
@@ -24,6 +24,8 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 .w{max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
 .cap{font-size:12px;letter-spacing:.32em;text-transform:uppercase;font-weight:400}
 .mute{color:var(--wg)}
+.acc{color:var(--tc)}
+::selection{background:var(--tc);color:#fff}
 .more{display:inline-block;font-size:12px;letter-spacing:.32em;text-transform:uppercase;font-weight:400;padding-bottom:6px;border-bottom:1px solid currentColor;transition:color .3s}
 .more:hover{color:var(--tc)}
 .zoom{overflow:hidden}
@@ -111,10 +113,10 @@ header nav a{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.25)}
 .ct{position:relative;overflow:hidden;background:var(--ch);color:var(--cr);padding:clamp(100px,13vw,160px) 0 50px}
 .ct h2{font-weight:200;font-size:clamp(44px,7vw,104px);line-height:1;margin-bottom:clamp(50px,7vw,90px)}
 .ct-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;border-top:1px solid rgba(247,243,236,.18);padding-top:34px}
-.ct-g .cap{color:#A9A6A0;display:block;margin-bottom:10px}
+.ct-g .cap{color:rgba(247,243,236,.55);display:block;margin-bottom:10px}
 .ct-g a,.ct-g span{font-size:clamp(18px,1.7vw,22px);font-weight:300}
 .ct-g a:hover{color:#E08A66}
-.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-top:clamp(80px,10vw,130px);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#A9A6A0}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-top:clamp(80px,10vw,130px);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:rgba(247,243,236,.55)}
 .foot svg{height:26px;width:auto}
 @media(max-width:700px){.ct-g{grid-template-columns:1fr}}
 
@@ -148,24 +150,24 @@ header nav a{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.25)}
 
 <section class="st w">
   <p>Porcelain tiles and large-format slabs, chosen in Morbi and delivered worldwide.</p>
-  <span class="cap mute">Morbi · India</span>
+  <span class="cap acc">Morbi · India</span>
 </section>
 
 <section class="w pair">
   <a href="https://drive.google.com/drive/folders/1idBbDTDYBhKuu123NXzPXqeet0tEDHoj" target="_blank" rel="noopener">
     <div class="zoom"><img src="images/slab-kitchen.jpg" alt="Kitchen floor in white marble-look slabs" loading="lazy"></div>
-    <div class="meta"><h2>Slabs</h2><span class="cap mute">120×180 cm</span></div>
+    <div class="meta"><h2>Slabs</h2><span class="cap acc">120×180 cm</span></div>
   </a>
   <a href="https://drive.google.com/drive/folders/1V_H2StGtnsIHXzGI2jzBP53b_KxtOn_m" target="_blank" rel="noopener">
     <div class="zoom"><img src="images/fullbody-bedroom.jpg" alt="Bedroom in grey full body tiles" loading="lazy"></div>
-    <div class="meta"><h2>Full Body</h2><span class="cap mute">9 · 15 mm</span></div>
+    <div class="meta"><h2>Full Body</h2><span class="cap acc">9 · 15 mm</span></div>
   </a>
 </section>
 
 <section class="idx w" id="sizes">
   <div class="idx-head">
     <h2>Collections</h2>
-    <span class="cap mute">Select a size</span>
+    <span class="cap acc">Select a size</span>
   </div>
   <div class="rows" id="rows"></div>
 </section>
@@ -174,7 +176,7 @@ header nav a{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.25)}
 
 <section class="gal">
   <div class="w gal-head">
-    <span class="cap">Spaces</span>
+    <span class="cap acc">Spaces</span>
     <div class="gbtn"><button id="prev" aria-label="Previous">←</button><button id="next" aria-label="Next">→</button></div>
   </div>
   <div class="strip" id="strip">
@@ -193,13 +195,13 @@ header nav a{color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.25)}
 
 <section class="reach w">
   <ul><li>India</li><li>GCC</li><li>Africa</li><li>Europe</li></ul>
-  <span class="cap mute">Exporting to 50+ countries</span>
+  <span class="cap acc">Exporting to 50+ countries</span>
 </section>
 
 <section class="ct" id="contact">
   <img class="map" src="images/world-dots.svg" alt="" aria-hidden="true">
   <div class="w">
-    <h2>Let's talk.</h2>
+    <h2>Let's talk<span class="acc">.</span></h2>
     <div class="ct-g">
       <div><span class="cap">WhatsApp</span><a href="https://wa.me/919751946677" target="_blank" rel="noopener">+91 97519 46677</a></div>
       <div><span class="cap">Email</span><a href="mailto:info@77tiles.com">info@77tiles.com</a></div>
